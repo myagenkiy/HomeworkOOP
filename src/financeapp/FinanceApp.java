@@ -10,15 +10,9 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class FinanceApp {
-    private final UserService userService;
-    private final FinanceService financeService;
-    private final Scanner scanner;
-
-    public FinanceApp () {
-        userService = new UserService();
-        financeService = new FinanceService();
-        scanner = new Scanner(System.in);
-    }
+    private final UserService userService = new UserService();
+    private final FinanceService financeService = new FinanceService();
+    private final Scanner scanner = new Scanner(System.in);
 
     public void run () {
         System.out.println("\n--------Приложение для управления личными финансами--------");
