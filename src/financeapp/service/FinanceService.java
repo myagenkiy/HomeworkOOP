@@ -14,6 +14,17 @@ public class FinanceService {
         user.getWallet().addTransaction(transaction);
     }
 
+    public void deleteIncomeOrExpence (User user, String category) {
+        boolean removed = user.getWallet().getTransactions()
+                .removeIf(transaction ->
+                        category.equalsIgnoreCase(transaction.getCategory())
+                );
+
+        if (!removed) {
+            throw new IllegalArgumentException("Категория не найдена");
+        }
+    }
+
     public void addExpence (User user, String category, double amount) {
         if (amount <= 0) {
             throw new IllegalArgumentException("Сумма должна быть положительной");

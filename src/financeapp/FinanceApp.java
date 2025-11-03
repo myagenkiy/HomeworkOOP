@@ -21,7 +21,7 @@ public class FinanceApp {
     }
 
     public void run () {
-        System.out.println("Приложение для управления личными финансами");
+        System.out.println("\n--------Приложение для управления личными финансами--------");
 
         while (true) {
             if (!userService.isUserLoggedIn()) {
@@ -35,11 +35,11 @@ public class FinanceApp {
     }
 
     private void showAuthMenu () {
-        System.out.println("Меню авторизации");
-        System.out.println("1. Регистрация");
+        System.out.println("\nМеню авторизации");
+        System.out.println("\n1. Регистрация");
         System.out.println("2. Вход");
         System.out.println("3. Выход");
-        System.out.print("Выберите действие: ");
+        System.out.print("\nВыберите действие: ");
     }
 
     private void handleAuthMenu () {
@@ -92,13 +92,14 @@ public class FinanceApp {
     }
 
     private void showMainMenu () {
-        System.out.println("Главное меню");
-        System.out.println("1. Добавить доход");
+        System.out.println("\nГлавное меню");
+        System.out.println("\n1. Добавить доход");
         System.out.println("2. Добавить расход");
-        System.out.println("3. Установить бюджет");
-        System.out.println("4. Просмотр статистики");
-        System.out.println("5. Выход");
-        System.out.print("Выберите действие: ");
+        System.out.println("3. Удалить доход или расход");
+        System.out.println("4. Установить бюджет");
+        System.out.println("5. Просмотр статистики");
+        System.out.println("6. Выход");
+        System.out.print("\nВыберите действие: ");
     }
 
     private void handleMainMenu () {
@@ -112,12 +113,15 @@ public class FinanceApp {
                 handleAddExpence();
                 break;
             case "3":
-                handleSetBudget();
+                handleDelete();
                 break;
             case "4":
-                showStatistics();
+                handleSetBudget();
                 break;
             case "5":
+                showStatistics();
+                break;
+            case "6":
                 userService.logout();
                 break;
             default:
@@ -164,6 +168,18 @@ public class FinanceApp {
         }
     }
 
+    private void handleDelete () {
+        try {
+            System.out.print("Введите категорию: ");
+            String category = scanner.nextLine().trim();
+
+            financeService.deleteIncomeOrExpence(userService.getCurrentUser(), category);
+            System.out.println("Категория удалена");
+        } catch (IllegalArgumentException e) {
+            System.out.println("Ошибка: " + e.getMessage());
+        }
+    }
+
     private void handleSetBudget () {
         try {
             System.out.print("Введите категорию: ");
@@ -184,7 +200,7 @@ public class FinanceApp {
     private void showStatistics () {
         User user = userService.getCurrentUser();
 
-        System.out.println("Статистика");
+        System.out.println("\nСтатистика");
 
         double totalIncome = financeService.getTotalIncome(user);
         double totalExpence = financeService.getTotalExpence(user);
