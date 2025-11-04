@@ -3,6 +3,7 @@ package financeapp;
 import financeapp.exception.InvalidCredentialsException;
 import financeapp.exception.UserNotFoundException;
 import financeapp.model.User;
+import financeapp.service.DataStorage;
 import financeapp.service.FinanceService;
 import financeapp.service.UserService;
 
@@ -10,7 +11,8 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class FinanceApp {
-    private final UserService userService = new UserService();
+    Map<String, User> users = DataStorage.loadUsers();
+    private final UserService userService = new UserService(users);
     private final FinanceService financeService = new FinanceService();
     private final Scanner scanner = new Scanner(System.in);
 
@@ -48,6 +50,7 @@ public class FinanceApp {
                 break;
             case "3":
                 System.out.println("Выход из приложения...");
+                DataStorage.saveData(users);
                 System.exit(0);
                 break;
             default:

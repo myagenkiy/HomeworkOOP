@@ -1,8 +1,11 @@
 package financeapp.model;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Transaction {
+public class Transaction implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     private String category;
     private double amount;
     private boolean isIncome;

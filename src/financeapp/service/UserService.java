@@ -10,7 +10,7 @@ public class UserService {
     private Map<String, User> users;
     private User currentUser;
 
-    public UserService() { this.users = new HashMap<>(); }
+    public UserService(Map<String, User> users) { this.users = users != null ? users : new HashMap<>(); }
 
     public void registerUser (String username, String password) {
         if (users.containsKey(username)) {

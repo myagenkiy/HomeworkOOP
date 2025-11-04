@@ -1,11 +1,14 @@
 package financeapp.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Wallet {
+public class Wallet implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     private List<Transaction> transactions;
     private Map<String, Double> budgets;
 
